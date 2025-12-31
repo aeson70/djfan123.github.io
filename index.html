@@ -3,63 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>DJ Neon Player</title>
+  <title>DJ Player</title>
   <style>
-    body {
-      margin: 0;
-      padding: 20px;
-      background: transparent !important;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      font-family: Arial, sans-serif;
-    }
-    .dj-player {
-      background: transparent;
-      padding: 15px;
-      text-align: center;
-    }
-    .visualizer {
-      height: 80px;
-      display: flex;
-      align-items: flex-end;
-      justify-content: center;
-      gap: 2px;
-      margin: 15px 0;
-    }
-    .bar {
-      width: 4px;
-      background: linear-gradient(to top, #ff0055, #ff33aa);
-      border-radius: 2px 2px 0 0;
-      box-shadow: 0 0 6px rgba(255, 0, 85, 0.7);
-      transition: height 0.05s ease;
-    }
-    .play-btn {
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      background: transparent;
-      border: 2px solid #ff0055;
-      color: #ff0055;
-      font-size: 20px;
-      cursor: pointer;
-      margin-top: 10px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      outline: none;
-      box-shadow: 0 0 12px rgba(255, 0, 85, 0.8);
-      transition: all 0.2s ease;
-      text-shadow: 0 0 8px #ff0055;
-    }
-    .play-btn:hover {
-      box-shadow: 0 0 20px #ff0055;
-      transform: scale(1.08);
-    }
-    .play-btn:active {
-      transform: scale(0.95);
-    }
+    body { margin:0; padding:20px; background:transparent; display:flex; justify-content:center; align-items:center; min-height:100vh; }
+    .dj-player { background:transparent; padding:15px; text-align:center; }
+    .visualizer { height:80px; display:flex; align-items:flex-end; justify-content:center; gap:2px; margin:15px 0; }
+    .bar { width:4px; background:linear-gradient(to top, #ff0055, #ff33aa); border-radius:2px 2px 0 0; box-shadow:0 0 6px rgba(255,0,85,0.7); transition:height 0.05s; }
+    .play-btn { width:60px; height:60px; border-radius:50%; background:transparent; border:2px solid #ff0055; color:#ff0055; font-size:20px; cursor:pointer; margin-top:10px; display:flex; justify-content:center; align-items:center; outline:none; box-shadow:0 0 12px rgba(255,0,85,0.8); transition:all 0.2s; text-shadow:0 0 8px #ff0055; }
+    .play-btn:hover { box-shadow:0 0 20px #ff0055; transform:scale(1.08); }
+    .play-btn:active { transform:scale(0.95); }
   </style>
 </head>
 <body>
@@ -68,7 +20,8 @@
     <button class="play-btn" id="playBtn">▶</button>
   </div>
 
-  <audio id="audio" src="<audio src="https://github.com/aeson70/djfan123.github.io/blob/main/3.mp3" ...>" preload="metadata"></audio>
+  <!-- ✅ 使用仓库内的 MP3（确保 mytrack.mp3 已上传） -->
+  <audio id="audio" src="https://github.com/aeson70/djfan123.github.io/blob/main/3.mp3" preload="metadata"></audio>
 
   <script>
     const audio = document.getElementById('audio');
@@ -103,7 +56,10 @@
         audio.play().then(() => {
           playBtn.textContent = '⏸';
           animate();
-        }).catch(e => console.warn('播放失败:', e));
+        }).catch(e => {
+          alert('播放失败！请检查音频文件是否有效。');
+          console.error('播放错误:', e);
+        });
       } else {
         audio.pause();
         playBtn.textContent = '▶';
